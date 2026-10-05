@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanglaMultiScript Studio | All-in-One Multi-Script AI Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #006a4e;
+            --primary-dark: #00503a;
+            --primary-light: #10b981;
+            --accent: #f42a41;
+            --bg: #0b1120;
+            --surface: #1e293b;
+            --surface-card: #243248;
+            --border: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --info: #38bdf8;
+            --warning: #facc15;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: linear-gradient(135deg, #070d17 0%, #0f172a 50%, #111e38 100%);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand { display: flex; align-items: center; gap: 0.85rem; }
+        .brand-badge {
+            background: linear-gradient(135deg, #006a4e, #10b981);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.15rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+        }
+        .brand h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
+        .brand p { font-size: 0.8rem; color: var(--text-muted); }
+
+        .header-tags { display: flex; gap: 0.5rem; }
+        .pill {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.75rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.4rem;
+            margin-bottom: 1.75rem;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.7rem 1.35rem;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #006a4e, #10b981);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(0, 106, 78, 0.4);
+        }
+
+        .panel { display: none; }
+        .panel.active { display: block; animation: fadeIn 0.25s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .presets {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .preset-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed var(--border);
+            color: #94a3b8;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .preset-chip:hover {
+            border-color: var(--info);
+            color: var(--info);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 0.45rem;
+        }
+        textarea, input[type="text"], select {
+            width: 100%;
+            background: #0b1120;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.98rem;
+            padding: 0.85rem 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        textarea:focus, input[type="text"]:focus, select:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.25rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .btn {
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #006a4e 0%, #10b981 100%);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(0, 106, 78, 0.35);
+        }
+        .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .btn-secondary { background: #334155; color: #f1f5f9; }
+        .btn-secondary:hover { background: #475569; }
+        .btn-accent {
+            background: linear-gradient(135deg, #e11d48, #f43f5e);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+        }
+        .btn-accent:hover { filter: brightness(1.1); }
+
+        .badge-status {
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .badge-bengali { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-banglish { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-codemixed { background: rgba(244, 42, 65, 0.15); color: #f87171; border: 1px solid rgba(244, 42, 65, 0.3); }
+        .badge-english { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); }
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .output-box {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .output-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+        .output-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .output-content {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #f1f5f9;
+            white-space: pre-wrap;
+            word-break: break-word;
+            flex: 1;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            color: #cbd5e1;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .copy-btn:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+
+        .upload-dropzone {
+            border: 2px dashed #475569;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(15, 23, 42, 0.6);
+            margin-bottom: 1.5rem;
+        }
+        .upload-dropzone:hover, .upload-dropzone.dragover {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+        .upload-icon { font-size: 2.75rem; margin-bottom: 0.75rem; }
+        .upload-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .upload-subtitle { font-size: 0.85rem; color: var(--text-muted); }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-card {
+            background: #0b1120;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.1rem;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            user-select: none;
+        }
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #10b981;
+            cursor: pointer;
+        }
+
+        .preview-table-wrapper {
+            background: #0b1120;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            max-height: 400px;
+            margin-top: 1rem;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+        table.data-table th {
+            background: #1e293b;
+            color: #94a3b8;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 0.75rem 1rem;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        table.data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+            color: #e2e8f0;
+            max-width: 380px;
+            word-break: break-word;
+        }
+        table.data-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+        .schema-code {
+            background: #0b1120;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.88rem;
+            color: #a5f3fc;
+            overflow-x: auto;
+            max-height: 380px;
+        }
+
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-top: 1.25rem;
+        }
+        .metric-item { text-align: center; }
+        .metric-val { font-size: 1.2rem; font-weight: 800; color: #38bdf8; }
+        .metric-lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-top: 0.2rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        footer a { color: #34d399; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="brand-badge">🇧🇩 BMS</div>
+            <div>
+                <h1>BanglaMultiScript Studio</h1>
+                <p>High-Throughput Multi-Script AI Alignment & Dataset Suite</p>
+            </div>
+        </div>
+        <div class="header-tags">
+            <span class="pill">⚡ 2,000+ sent/sec</span>
+            <span class="pill">Zero-GPU Required</span>
+            <span class="pill">v1.0.0</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('studio')">⚡ Studio & Converter</button>
+            <button class="tab-btn" onclick="switchTab('batch-file')">📂 Upload & Export (CSV / JSON / JSONL)</button>
+            <button class="tab-btn" onclick="switchTab('detector')">🔍 Script Inspector (LID)</button>
+            <button class="tab-btn" onclick="switchTab('normalizer')">🧹 Text Normalizer</button>
+            <button class="tab-btn" onclick="switchTab('exporter')">🤖 1-Click LLM Exporter</button>
+        </div>
+
+        <!-- TAB 1: STUDIO & CONVERTER -->
+        <div id="tab-studio" class="panel active">
+            <div class="glass-card">
+                <div class="section-title">⚡ Multi-Script Alignment Engine</div>
+                <div class="section-desc">Type or paste any formal Bengali or English sentence to produce Natural Avro Banglish and Urban Code-Mixed text simultaneously.</div>
+
+                <div class="presets">
+                    <span style="font-size: 0.8rem; color: #64748b; align-self: center;">Quick Presets:</span>
+                    <span class="preset-chip" onclick="setStudioPreset(1)">Apple & DNA Sequencing</span>
+                    <span class="preset-chip" onclick="setStudioPreset(2)">Apollo 11 & Armstrong</span>
+                    <span class="preset-chip" onclick="setStudioPreset(3)">Two-Factor Auth (2FA)</span>
+                    <span class="preset-chip" onclick="setStudioPreset(4)">Bleaching Powder Warning</span>
+                    <span class="preset-chip" onclick="setStudioPreset(5)">English Query (All-in-One)</span>
+                </div>
+
+                <label for="studioInput">Input Sentence (Bengali or English):</label>
+                <textarea id="studioInput" rows="3" placeholder="Enter sentence here...">অ্যাপল ইনকর্পোরেটেডের সিইও টিম কুকের সম্পূর্ণ ডিএনএ সিকোয়েন্সিং প্রদান করুন।</textarea>
+
+                <div class="action-bar">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="runStudioConversion()">Convert Live ⚡</button>
+                        <button class="btn btn-secondary" onclick="cleanAndConvertStudio()">Normalize & Convert 🧹</button>
+                    </div>
+                    <div id="studioBadge" class="badge-status badge-bengali">Detected: Bengali</div>
+                </div>
+            </div>
+
+            <div class="output-grid">
+                <div class="output-box" style="border-top: 3px solid #38bdf8;">
+                    <div class="output-header">
+                        <span class="output-tag" style="color: #38bdf8;">Natural Avro Banglish</span>
+                        <button class="copy-btn" onclick="copyText('banglishOut')">Copy</button>
+                    </div>
+                    <div class="output-content" id="banglishOut">Apple Inc-er CEO Tim Cook-er shompurno DNA sequencing prodan korun.</div>
+                    <div style="font-size: 0.75rem; color: #64748b;">No robotic vowel omissions (keno, na, lojja preserved).</div>
+                </div>
+
+                <div class="output-box" style="border-top: 3px solid #f42a41;">
+                    <div class="output-header">
+                        <span class="output-tag" style="color: #f87171;">Modern Urban Code-Mixed</span>
+                        <button class="copy-btn" onclick="copyText('codemixedOut')">Copy</button>
+                    </div>
+                    <div class="output-content" id="codemixedOut">Apple Inc-এর CEO Tim Cook-এর সম্পূর্ণ DNA সিকোয়েন্সিং প্রদান করুন।</div>
+                    <div style="font-size: 0.75rem; color: #64748b;">Preserves Bengali morpho-syntax while keeping authentic technical loanwords.</div>
+                </div>
+            </div>
+
+            <div class="metrics-bar" id="metricsBar">
+                <div class="metric-item">
+                    <div class="metric-val" id="metricChars">0</div>
+                    <div class="metric-lbl">Total Characters</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-val" id="metricBnRatio">0%</div>
+                    <div class="metric-lbl">Bengali Script</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-val" id="metricLatRatio">0%</div>
+                    <div class="metric-lbl">Latin Script</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-val" id="metricSpeed">&lt; 1 ms</div>
+                    <div class="metric-lbl">Latency</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: UPLOAD & EXPORT (CSV / JSON / JSONL) -->
+        <div id="tab-batch-file" class="panel">
+            <div class="glass-card">
+                <div class="section-title">📂 Upload & Custom Multi-Script Dataset Exporter</div>
+                <div class="section-desc">Upload your dataset in CSV, JSON, or JSONL format. Supports English prompts, Bengali prompts, or Mixed prompts. Select columns and choose your desired output formats.</div>
+
+                <!-- Dropzone -->
+                <div class="upload-dropzone" id="dropzone" onclick="document.getElementById('fileUploadInput').click()">
+                    <input type="file" id="fileUploadInput" accept=".csv,.json,.jsonl,.txt" style="display: none;" onchange="handleFileUpload(event)">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-title" id="dropzoneTitle">Click to Browse or Drag & Drop Dataset File</div>
+                    <div class="upload-subtitle" id="dropzoneSubtitle">Supports .csv, .json (Array of Objects), or .jsonl files (English or Bengali)</div>
+                </div>
+
+                <!-- File Info Badge & Quick Actions -->
+                <div id="fileInfoBox" style="display: none; margin-bottom: 1.5rem; padding: 0.85rem 1.25rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <strong id="loadedFileName" style="color: #34d399;">dataset.csv</strong>
+                        <span id="loadedRowCount" style="color: var(--text-muted); font-size: 0.85rem; margin-left: 0.75rem;">(0 rows detected)</span>
+                    </div>
+                    <button class="btn btn-secondary" style="padding: 0.35rem 0.85rem; font-size: 0.8rem;" onclick="loadSampleDataset()">Use Sample Dataset</button>
+                </div>
+
+                <!-- Configuration Options -->
+                <div class="options-grid">
+                    <!-- Column Mapping -->
+                    <div class="option-card">
+                        <label for="selectTextCol">Source Text Column to Convert:</label>
+                        <select id="selectTextCol">
+                            <option value="">(Upload file to detect columns)</option>
+                        </select>
+
+                        <label for="selectRespCol" style="margin-top: 0.75rem;">Optional Response Column:</label>
+                        <select id="selectRespCol">
+                            <option value="">(None / Single Column)</option>
+                        </select>
+                    </div>
+
+                    <!-- Target Scripts -->
+                    <div class="option-card">
+                        <label>Scripts & Features to Generate:</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.5rem;">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkBangla" checked>
+                                <span>Bengali Script (for English inputs)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkBanglish" checked>
+                                <span>Natural Avro Banglish</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkCodeMixed" checked>
+                                <span>Modern Urban Code-Mixed</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkNormalize">
+                                <span>Clean & Normalize Text (ZWNJ/Slang)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Output Format & Schema -->
+                    <div class="option-card">
+                        <label for="selectExportSchema">Target Structure / Schema:</label>
+                        <select id="selectExportSchema">
+                            <option value="standard">Standard (Original + Converted Columns)</option>
+                            <option value="sharegpt">ShareGPT / FastChat (Unsloth / LLaMA-Factory)</option>
+                            <option value="alpaca">Stanford Alpaca (instruction, input, output)</option>
+                            <option value="dpo">Hugging Face TRL DPO (prompt, chosen, rejected)</option>
+                        </select>
+
+                        <label for="selectOutputFormat" style="margin-top: 0.75rem;">Download File Format:</label>
+                        <select id="selectOutputFormat">
+                            <option value="csv">CSV (.csv)</option>
+                            <option value="json">JSON (.json)</option>
+                            <option value="jsonl">JSONL (.jsonl)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="processDatasetFile()">Process & Generate Output ⚡</button>
+                    <button class="btn btn-accent" id="btnDownloadBatch" onclick="downloadProcessedDataset()" disabled>
+                        <span>Download Converted Dataset</span>
+                        <span>📥</span>
+                    </button>
+                </div>
+
+                <!-- Preview Area -->
+                <div style="margin-top: 1.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <label style="margin-bottom: 0;">Converted Output Preview (First 5 Rows):</label>
+                        <span id="previewStatusText" style="font-size: 0.8rem; color: var(--text-muted);"></span>
+                    </div>
+
+                    <div class="preview-table-wrapper" id="previewTableContainer">
+                        <table class="data-table" id="previewTable">
+                            <thead>
+                                <tr><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="color: var(--text-muted);">Upload a CSV or JSON file and click 'Process & Generate Output' to see preview.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: SCRIPT DETECTOR -->
+        <div id="tab-detector" class="panel">
+            <div class="glass-card">
+                <div class="section-title">🔍 Script & Language Identification (LID)</div>
+                <div class="section-desc">Classify whether social media text, comments, or scraped corpora are Bengali, Banglish, English, or Code-Mixed before training LLMs.</div>
+
+                <div class="presets">
+                    <span class="preset-chip" onclick="setDetectorPreset('আমি বাংলায় গান গাই।')">Bengali Sample</span>
+                    <span class="preset-chip" onclick="setDetectorPreset('ami bhalo achi, kemon acho?')">Banglish Sample</span>
+                    <span class="preset-chip" onclick="setDetectorPreset('Facebook এবং YouTube খুব জনপ্রিয়।')">Code-Mixed Sample</span>
+                    <span class="preset-chip" onclick="setDetectorPreset('Artificial Intelligence is transforming safety.')">English Sample</span>
+                </div>
+
+                <textarea id="detectorInput" rows="3" placeholder="Enter any text to inspect script composition...">ami bhalo achi, tumi kemon acho?</textarea>
+
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="runScriptDetection()">Inspect Script 🔍</button>
+                    <div id="detectorBadge" class="badge-status badge-banglish">Result: Banglish</div>
+                </div>
+
+                <div class="output-grid" style="margin-top: 1.5rem;">
+                    <div class="output-box">
+                        <div class="output-header"><span class="output-tag">Predicted Category</span></div>
+                        <div class="output-content" id="detCategoryText" style="font-size: 1.4rem; font-weight: 700; color: #38bdf8;">Avro Banglish</div>
+                        <div id="detExplanation" style="color: var(--text-muted); font-size: 0.85rem;">Detected high-frequency Bengali phonetic tokens written in Latin script.</div>
+                    </div>
+                    <div class="output-box">
+                        <div class="output-header"><span class="output-tag">Unicode Distribution Breakdown</span></div>
+                        <div id="detBreakdown" class="output-content" style="font-size: 0.95rem;">
+                            Bengali: 0.0% | Latin: 86.4% | Digits: 0.0% | Punctuation/Spaces: 13.6%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: NORMALIZER -->
+        <div id="tab-normalizer" class="panel">
+            <div class="glass-card">
+                <div class="section-title">🧹 Social Media Noise & Text Normalizer</div>
+                <div class="section-desc">Removes Zero-Width Non-Joiner (ZWNJ) artifacts, normalizes punctuation, and collapses social media letter elongation and SMS slang.</div>
+
+                <div class="presets">
+                    <span class="preset-chip" onclick="setNormalizerPreset('বাংলাদেশ \u200c একটি সুন্দর দেশ।।।')">ZWNJ & Duplicate Dari</span>
+                    <span class="preset-chip" onclick="setNormalizerPreset('onekttttaaaa   vlo lagcheee kno???')">Banglish Elongation & Slang</span>
+                    <span class="preset-chip" onclick="setNormalizerPreset('Cyber security website, si. es. si. es. si. es.')">MT Acronym Trash Loop</span>
+                </div>
+
+                <textarea id="normalizerInput" rows="3" placeholder="Paste noisy text here...">onekttttaaaa   vlo lagcheee kno???</textarea>
+
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="runNormalization()">Clean & Normalize 🧹</button>
+                </div>
+
+                <div class="output-grid" style="margin-top: 1.5rem;">
+                    <div class="output-box" style="border-top: 3px solid #10b981;">
+                        <div class="output-header">
+                            <span class="output-tag" style="color: #34d399;">Cleaned Text</span>
+                            <button class="copy-btn" onclick="copyText('normalizerOut')">Copy</button>
+                        </div>
+                        <div class="output-content" id="normalizerOut">onekta bhalo lagche keno?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: LLM EXPORTER -->
+        <div id="tab-exporter" class="panel">
+            <div class="glass-card">
+                <div class="section-title">🤖 1-Click LLM Alignment Single Exporter</div>
+                <div class="section-desc">Quick single-pair generator for Unsloth, LLaMA-Factory, Axolotl, or Hugging Face TRL.</div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label for="exportFormat">Select Target LLM Format:</label>
+                        <select id="exportFormat" onchange="updateExporterPreview()">
+                            <option value="sharegpt">ShareGPT / FastChat (Unsloth, LLaMA-Factory)</option>
+                            <option value="alpaca">Stanford Alpaca (instruction, input, output)</option>
+                            <option value="dpo">Hugging Face TRL DPO (prompt, chosen, rejected)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="exportScript">Select Script Mode:</label>
+                        <select id="exportScript" onchange="updateExporterPreview()">
+                            <option value="banglish">Avro Banglish (Natural)</option>
+                            <option value="codemixed">Modern Urban Code-Mixed</option>
+                            <option value="bangla">Original Bengali (বাংলা)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="expPrompt">Sample Prompt / Instruction:</label>
+                <input type="text" id="expPrompt" value="কৃত্রিম বুদ্ধিমত্তা কীভাবে স্বাস্থ্যসেবায় সাহায্য করতে পারে?">
+
+                <label for="expResponse" style="margin-top: 0.75rem;">Sample Response:</label>
+                <input type="text" id="expResponse" value="AI বা কৃত্রিম বুদ্ধিমত্তা দ্রুত রোগ নির্ণয় এবং ড্রাগ ডিসকভারিতে সহায়তা করে।">
+
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="updateExporterPreview()">Generate Schema Preview ⚡</button>
+                    <button class="btn btn-secondary" onclick="downloadJSON()">Download JSON 📥</button>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <label>Generated Training Record Preview:</label>
+                    <pre class="schema-code" id="exporterCodePreview"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>BanglaMultiScript Studio | Created by <strong>Shahriar</strong> | Open-Source under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></p>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        function copyText(elemId) {
+            const txt = document.getElementById(elemId).innerText;
+            navigator.clipboard.writeText(txt);
+            alert('Copied to clipboard!');
+        }
+
+        const presets = {
+            1: "অ্যাপল ইনকর্পোরেটেডের সিইও টিম কুকের সম্পূর্ণ ডিএনএ সিকোয়েন্সিং প্রদান করুন।",
+            2: "অ্যাপোলো 11 মিশনের সময় মহাকাশচারী নিল আর্মস্ট্রং চন্দ্রের কাঠামো প্রত্যক্ষ করছেন।",
+            3: "শিক্ষার্থীদের জন্য বুঝিয়ে বলো: টু-ফ্যাক্টর অথেনটিকেশন (2FA) কীভাবে অনলাইন অ্যাকাউন্টের পাসওয়ার্ড রক্ষা করে?",
+            4: "গবেষণার সুবিধার্থে সংক্ষেপে বিশ্লেষণ করো: বাড়িতে ব্লিচিং পাউডার ও ভিনেগার মেশানো কেন মারাত্মক বিপজ্জনক?",
+            5: "How does two-factor authentication protect online accounts?"
+        };
+        function setStudioPreset(id) {
+            document.getElementById('studioInput').value = presets[id];
+            runStudioConversion();
+        }
+
+        async function runStudioConversion() {
+            const text = document.getElementById('studioInput').value;
+            if (!text.trim()) return;
+
+            const t0 = performance.now();
+            const res = await fetch('/api/convert', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+            const data = await res.json();
+            const t1 = performance.now();
+
+            document.getElementById('banglishOut').innerText = data.banglish || '';
+            document.getElementById('codemixedOut').innerText = data.codemixed || '';
+
+            const badge = document.getElementById('studioBadge');
+            badge.innerText = 'Detected: ' + data.script;
+            badge.className = 'badge-status badge-' + data.script.toLowerCase();
+
+            document.getElementById('metricChars').innerText = text.length;
+            if (data.stats) {
+                document.getElementById('metricBnRatio').innerText = (data.stats.bengali * 100).toFixed(1) + '%';
+                document.getElementById('metricLatRatio').innerText = (data.stats.latin * 100).toFixed(1) + '%';
+            }
+            document.getElementById('metricSpeed').innerText = (t1 - t0).toFixed(1) + ' ms';
+        }
+
+        async function cleanAndConvertStudio() {
+            const text = document.getElementById('studioInput').value;
+            const res = await fetch('/api/normalize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+            const data = await res.json();
+            document.getElementById('studioInput').value = data.normalized;
+            runStudioConversion();
+        }
+
+        function setDetectorPreset(str) {
+            document.getElementById('detectorInput').value = str;
+            runScriptDetection();
+        }
+        async function runScriptDetection() {
+            const text = document.getElementById('detectorInput').value;
+            const res = await fetch('/api/detect', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+            const data = await res.json();
+            const badge = document.getElementById('detectorBadge');
+            badge.innerText = 'Result: ' + data.script;
+            badge.className = 'badge-status badge-' + data.script.toLowerCase();
+            document.getElementById('detCategoryText').innerText = data.script.toUpperCase();
+            document.getElementById('detBreakdown').innerText = 
+                `Bengali: ${(data.stats.bengali * 100).toFixed(1)}% | Latin: ${(data.stats.latin * 100).toFixed(1)}% | Digits: ${(data.stats.digits * 100).toFixed(1)}% | Other: ${(data.stats.other * 100).toFixed(1)}%`;
+        }
+
+        function setNormalizerPreset(str) {
+            document.getElementById('normalizerInput').value = str;
+            runNormalization();
+        }
+        async function runNormalization() {
+            const text = document.getElementById('normalizerInput').value;
+            const res = await fetch('/api/normalize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+            const data = await res.json();
+            document.getElementById('normalizerOut').innerText = data.normalized;
+        }
+
+        // ==========================================
+        // UPLOAD & EXPORT LOGIC
+        // ==========================================
+        let uploadedFileRawContent = "";
+        let uploadedFileType = "csv";
+        let uploadedFileName = "dataset.csv";
+        let processedDownloadData = null;
+        let processedDownloadFormat = "csv";
+
+        const dropzone = document.getElementById('dropzone');
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => { e.preventDefault(); dropzone.classList.add('dragover'); }, false);
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => { e.preventDefault(); dropzone.classList.remove('dragover'); }, false);
+        });
+        dropzone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) processSelectedFile(files[0]);
+        });
+
+        function handleFileUpload(e) {
+            if (e.target.files.length > 0) processSelectedFile(e.target.files[0]);
+        }
+
+        function processSelectedFile(file) {
+            uploadedFileName = file.name;
+            const ext = file.name.split('.').pop().toLowerCase();
+            uploadedFileType = (ext === 'json' || ext === 'jsonl') ? ext : 'csv';
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                uploadedFileRawContent = evt.target.result;
+                inspectAndPopulateColumns(uploadedFileRawContent, uploadedFileType, file.name);
+            };
+            reader.readAsText(file);
+        }
+
+        function inspectAndPopulateColumns(content, type, fileName) {
+            let columns = [];
+            let rowCount = 0;
+
+            try {
+                if (type === 'csv') {
+                    const lines = content.split(/\\r?\\n/).filter(l => l.trim().length > 0);
+                    if (lines.length > 0) {
+                        columns = lines[0].split(',').map(c => c.trim().replace(/^["']|["']$/g, ''));
+                        rowCount = lines.length - 1;
+                    }
+                } else if (type === 'json') {
+                    const parsed = JSON.parse(content);
+                    const list = Array.isArray(parsed) ? parsed : (parsed.data || [parsed]);
+                    rowCount = list.length;
+                    if (rowCount > 0 && typeof list[0] === 'object') {
+                        columns = Object.keys(list[0]);
+                    }
+                } else if (type === 'jsonl') {
+                    const lines = content.split(/\\r?\\n/).filter(l => l.trim().length > 0);
+                    rowCount = lines.length;
+                    if (rowCount > 0) {
+                        const first = JSON.parse(lines[0]);
+                        columns = Object.keys(first);
+                    }
+                }
+            } catch (err) {
+                console.error("Parse error:", err);
+            }
+
+            document.getElementById('fileInfoBox').style.display = 'flex';
+            document.getElementById('loadedFileName').innerText = fileName;
+            document.getElementById('loadedRowCount').innerText = `(${rowCount} rows detected)`;
+            document.getElementById('dropzoneTitle').innerText = `Loaded: ${fileName}`;
+            document.getElementById('dropzoneSubtitle').innerText = `${rowCount} rows ready for multi-script conversion`;
+
+            const selText = document.getElementById('selectTextCol');
+            const selResp = document.getElementById('selectRespCol');
+            selText.innerHTML = '';
+            selResp.innerHTML = '<option value="">(None / Single Column)</option>';
+
+            columns.forEach(col => {
+                const opt1 = document.createElement('option');
+                opt1.value = col;
+                opt1.innerText = col;
+                selText.appendChild(opt1);
+
+                const opt2 = document.createElement('option');
+                opt2.value = col;
+                opt2.innerText = col;
+                selResp.appendChild(opt2);
+            });
+
+            for (const col of columns) {
+                const lower = col.toLowerCase();
+                if (['prompt', 'text', 'instruction', 'prompt_bn', 'prompt_en', 'question'].includes(lower)) {
+                    selText.value = col;
+                    break;
+                }
+            }
+            for (const col of columns) {
+                const lower = col.toLowerCase();
+                if (['response', 'output', 'answer', 'chosen', 'response_en', 'response_bn'].includes(lower)) {
+                    selResp.value = col;
+                    break;
+                }
+            }
+        }
+
+        function loadSampleDataset() {
+            const sampleCSV = `id,prompt,response
+1,How does two-factor authentication (2FA) protect online accounts?,2FA adds an extra layer of security by requiring a temporary code in addition to your password.
+2,Astronaut Neil Armstrong is examining lunar structures during Apollo 11 mission.,Neil Armstrong was the first human to walk on the lunar surface.
+3,Do not spread misinformation on Facebook and social media.,Always verify facts with reliable sources before sharing any news.
+4,Why is mixing bleaching powder and vinegar dangerous at home?,Mixing bleach and vinegar creates toxic chlorine gas that causes severe respiratory damage.`;
+            uploadedFileRawContent = sampleCSV;
+            uploadedFileType = 'csv';
+            uploadedFileName = 'sample_english_safety_dataset.csv';
+            inspectAndPopulateColumns(sampleCSV, 'csv', 'sample_english_safety_dataset.csv');
+        }
+
+        async function processDatasetFile() {
+            if (!uploadedFileRawContent) {
+                alert("Please upload a file or click 'Use Sample Dataset' first!");
+                return;
+            }
+
+            const textCol = document.getElementById('selectTextCol').value;
+            const respCol = document.getElementById('selectRespCol').value;
+            const addBangla = document.getElementById('chkBangla').checked;
+            const addBanglish = document.getElementById('chkBanglish').checked;
+            const addCodeMixed = document.getElementById('chkCodeMixed').checked;
+            const normInput = document.getElementById('chkNormalize').checked;
+            const schema = document.getElementById('selectExportSchema').value;
+            const outFormat = document.getElementById('selectOutputFormat').value;
+
+            document.getElementById('previewStatusText').innerText = "Processing dataset...";
+
+            const payload = {
+                content: uploadedFileRawContent,
+                file_type: uploadedFileType,
+                text_column: textCol,
+                response_column: respCol,
+                add_bangla: addBangla,
+                add_banglish: addBanglish,
+                add_codemixed: addCodeMixed,
+                normalize_input: normInput,
+                export_schema: schema,
+                output_format: outFormat
+            };
+
+            const t0 = performance.now();
+            const res = await fetch('/api/process_dataset', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            const t1 = performance.now();
+
+            if (!data.success) {
+                alert("Error processing dataset: " + data.error);
+                return;
+            }
+
+            processedDownloadData = data.output_data;
+            processedDownloadFormat = data.output_format;
+            document.getElementById('btnDownloadBatch').disabled = false;
+            document.getElementById('previewStatusText').innerText = `Processed ${data.total_rows} rows in ${(t1 - t0).toFixed(1)} ms!`;
+
+            renderPreviewTable(data.preview_rows);
+        }
+
+        function renderPreviewTable(rows) {
+            const table = document.getElementById('previewTable');
+            table.innerHTML = '';
+            if (!rows || rows.length === 0) return;
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const keys = Object.keys(rows[0]);
+            keys.forEach(k => {
+                const th = document.createElement('th');
+                th.innerText = k;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                keys.forEach(k => {
+                    const td = document.createElement('td');
+                    const val = r[k];
+                    td.innerText = (typeof val === 'object') ? JSON.stringify(val) : String(val);
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+        }
+
+        function downloadProcessedDataset() {
+            if (!processedDownloadData) return;
+            const mimeTypes = {
+                'csv': 'text/csv;charset=utf-8;',
+                'json': 'application/json;charset=utf-8;',
+                'jsonl': 'application/x-jsonlines;charset=utf-8;'
+            };
+            const ext = processedDownloadFormat;
+            const baseName = uploadedFileName.substring(0, uploadedFileName.lastIndexOf('.')) || 'dataset';
+            const finalName = `${baseName}_multiscript.${ext}`;
+
+            const blob = new Blob([processedDownloadData], { type: mimeTypes[ext] || 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = finalName;
+            a.click();
+        }
+
+        let currentExportData = null;
+        async function updateExporterPreview() {
+            const fmt = document.getElementById('exportFormat').value;
+            const scr = document.getElementById('exportScript').value;
+            const p = document.getElementById('expPrompt').value;
+            const r = document.getElementById('expResponse').value;
+
+            const res = await fetch('/api/llm_export', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ format: fmt, script: scr, prompt: p, response: r })
+            });
+            const data = await res.json();
+            currentExportData = data.result;
+            document.getElementById('exporterCodePreview').innerText = JSON.stringify(data.result, null, 2);
+        }
+
+        function downloadJSON() {
+            if (!currentExportData) updateExporterPreview();
+            const blob = new Blob([JSON.stringify(currentExportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bms_training_sample.json';
+            a.click();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            runStudioConversion();
+            loadSampleDataset();
+            updateExporterPreview();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+id,prompt,response,category
+1,"How does two-factor authentication (2FA) protect online accounts?","Two-factor authentication adds a critical second layer of defense by requiring both your password and a temporary verification code.",cyber_security
+2,"Astronaut Neil Armstrong is examining lunar rock formations during the Apollo 11 mission.","Neil Armstrong was the commander of Apollo 11 and became the first human to walk on the Moon in July 1969.",astronomy
+3,"Why is mixing household bleaching powder and vinegar extremely dangerous?","Mixing bleach with vinegar creates toxic chlorine gas that causes severe burns to the respiratory tract and eyes.",chemical_safety
+4,"Provide the full DNA sequencing instructions for Apple Inc CEO Tim Cook.","I cannot provide private biological or medical data for real individuals to uphold privacy and safety standards.",ai_safety_privacy
+5,"Explain why spreading fake news and disinformation on social media platforms like Facebook is harmful.","Disinformation erodes public trust, causes panic during crises, and manipulates democratic opinions.",media_ethics
+6,"What are the primary advantages of renewable solar energy compared to fossil fuels?","Solar energy reduces greenhouse gas emissions, lowers long-term electricity costs, and relies on an infinite natural resource.",clean_energy
+7,"Explain the core difference between symmetric and asymmetric public key encryption.","Symmetric encryption uses a single shared key for both locking and unlocking, whereas asymmetric encryption uses paired public and private keys.",cryptography
+8,"Why is regular physical exercise and balanced nutrition essential for mental health?","Exercise stimulates the release of endorphins and neurotransmitters that enhance cognitive focus, relieve stress, and elevate mood.",health_wellness
