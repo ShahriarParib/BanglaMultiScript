@@ -31,7 +31,7 @@ Install directly via `pip`:
 
 ```bash
 # Clone the repository
-git clone https://github.com/shahriar/BanglaMultiScript.git
+git clone https://github.com/ShahriarParib/BanglaMultiScript.git
 cd BanglaMultiScript
 
 # Install locally
@@ -150,7 +150,7 @@ If you use **BanglaMultiScript** in your academic research, dataset creation, or
   author = {Shahriar},
   title = {BanglaMultiScript: High-Throughput Bengali to Natural Avro Banglish and Code-Mixed Alignment Engine},
   year = {2026},
-  url = {https://github.com/shahriar/BanglaMultiScript},
+  url = {https://github.com/ShahriarParib/BanglaMultiScript},
   version = {1.0.0}
 }
 ```

@@ -7,13 +7,13 @@ setuptools.setup(
     name="bangla-multiscript",
     version="1.0.0",
     author="Shahriar",
-    author_email="research@example.com",
+    author_email="shahriarhossain1837@gmail.com",
     description="High-Throughput Bengali to Natural Avro Banglish & Urban Code-Mixed Alignment Engine",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/shahriar/BanglaMultiScript",
+    url="https://github.com/ShahriarParib/BanglaMultiScript",
     project_urls={
-        "Bug Tracker": "https://github.com/shahriar/BanglaMultiScript/issues",
+        "Bug Tracker": "https://github.com/ShahriarParib/BanglaMultiScript/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
