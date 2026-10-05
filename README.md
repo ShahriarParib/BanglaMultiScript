@@ -1,6 +1,8 @@
 # 🇧🇩 BanglaMultiScript
 
-[![PyPI version](https://img.shields.io/badge/pypi-v1.0.0-blue.svg)](https://pypi.org/project/bangla-multiscript/)
+[![PyPI version](https://img.shields.io/pypi/v/bangla-multiscript.svg?color=blue)](https://pypi.org/project/bangla-multiscript/)
+[![PyPI Downloads](https://static.pepy.tech/badge/bangla-multiscript)](https://pepy.tech/project/bangla-multiscript)
+[![CI Tests](https://github.com/ShahriarParib/BanglaMultiScript/actions/workflows/test.yml/badge.svg)](https://github.com/ShahriarParib/BanglaMultiScript/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-green.svg)](https://www.python.org/downloads/)
 [![Throughput](https://img.shields.io/badge/speed-2%2C000%2B%20sent%2Fsec-brightgreen.svg)](#benchmarks)
@@ -27,20 +29,19 @@ Designed specifically for **Large Language Model (LLM) safety alignment, multi-s
 
 ## 🚀 Installation
 
-Install directly via `pip` from PyPI:
-
-```bash
-pip install bangla-multiscript
-```
-
-Or install from source for development:
+Install directly via `pip`:
 
 ```bash
 # Clone the repository
 git clone https://github.com/ShahriarParib/BanglaMultiScript.git
 cd BanglaMultiScript
 
-# Install locally in editable mode
+# Install locally
+pip install .
+```
+
+Or install in editable development mode:
+```bash
 pip install -e .
 ```
 
