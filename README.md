@@ -27,19 +27,20 @@ Designed specifically for **Large Language Model (LLM) safety alignment, multi-s
 
 ## 🚀 Installation
 
-Install directly via `pip`:
+Install directly via `pip` from PyPI:
+
+```bash
+pip install bangla-multiscript
+```
+
+Or install from source for development:
 
 ```bash
 # Clone the repository
 git clone https://github.com/ShahriarParib/BanglaMultiScript.git
 cd BanglaMultiScript
 
-# Install locally
-pip install .
-```
-
-Or install in editable development mode:
-```bash
+# Install locally in editable mode
 pip install -e .
 ```
 
